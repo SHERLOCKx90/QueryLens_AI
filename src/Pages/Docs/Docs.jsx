@@ -189,7 +189,7 @@ const Docs = () => {
                                     <strong>Transformation</strong>:
                                     <ul>
                                         <li>
-                                            Step 1: Filter rows where <code>Population > 1,000,000</code>.
+                                            Step 1: Filter rows where <code>Population &gt; 1,000,000</code>.
                                         </li>
                                         <li>Step 2: Calculate the average of the <code>Income</code> column.</li>
                                     </ul>
