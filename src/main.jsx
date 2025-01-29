@@ -8,7 +8,7 @@ import Docs from './Pages/Docs/Docs.jsx';
 import About from './Pages/About/About.jsx';
 
 //publishable key
-const PUBLISHABLE_KEY = pk_test_Y2FyaW5nLXNhbG1vbi0xMS5jbGVyay5hY2NvdW50cy5kZXYk
+const PUBLISHABLE_KEY = 'pk_test_Y2FyaW5nLXNhbG1vbi0xMS5jbGVyay5hY2NvdW50cy5kZXYk';
 
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
