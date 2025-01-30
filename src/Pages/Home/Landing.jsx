@@ -1,29 +1,3 @@
-// import React from 'react'
-// import { MoveRight } from 'lucide-react';
-// import Cards from '../../Components/Cards';
-// import FooterSec from '../../Components/FooterSec';
-
-// const Landing = () => {
-//     return (
-//         <div className='h-full overflow-x-hidden flex flex-col justify-center items-start bg-white'>
-//             <h1 className='font-bold text-5xl text-black text-left my-5 px-10'>
-//                 The only Lens you need for Data Interaction.
-//             </h1>
-//             <h3 className='text-left font-medium px-10'>Explore our advanced dynamic data interaction AI platform for Developers.</h3>
-//             <button className='mt-5 bg-black mx-10 px-4 py-2 text-white rounded-full font-medium transition-all flex gap-2 hover:gap-5'>Try Demo <span><MoveRight /></span></button>
-//             <div className='px-10'><img src="home-banner.jpg" alt="app-snippet" className='my-10 rounded-xl shadow-xl shadow-gray-400' /></div>
-//             <div className='px-10'>
-//                 <Cards />
-//             </div>
-//             <div className='w-full'>
-//                 <FooterSec />
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Landing
-
 import React from 'react'
 import { MoveRight } from 'lucide-react';
 import Cards from '../../Components/Cards';

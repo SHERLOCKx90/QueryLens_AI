@@ -3,7 +3,7 @@ import React from 'react'
 const AboutCard = () => {
     return (
         <div
-            className="hero min-h-fit-content p-5 sm:p-10 relative bg-opacity-50 rounded-badge"
+            className="hero min-h-fit-content p-10 sm:p-10 relative bg-opacity-50 rounded-badge"
             style={{
                 backgroundImage: "url(/image-3.jpg)",
                 backgroundSize: 'cover',

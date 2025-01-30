@@ -5,10 +5,11 @@ const Docs = () => {
     return (
         <MainLayout>
             <div className='px-5 md:px-10 overflow-x-hidden'>
-                <h1 className='font-bold text-3xl md:text-5xl text-black text-center my-5'>
-                    QueryLens AI Documentation 📝
+                <h1 className='font-bold text-3xl md:text-5xl text-black text-left my-5 sm:my-10 sm:text-center'>
+                    📝 <br />
+                    QueryLens AI <br />Documentation
                 </h1>
-                <div className='prose max-w-none mx-5 my-10 md:m-10 text-justify'>
+                <div className='prose max-w-none text-left'>
                     <p>
                         Welcome to the QueryLensAI Documentation—a comprehensive resource hub
                         designed to guide developers and data professionals in seamlessly
@@ -49,7 +50,7 @@ const Docs = () => {
                                     <strong>Command Examples</strong>:
                                     <div className="mockup-code">
                                         <pre data-prefix="~$">
-                                            <code>
+                                            <code className='text-green-400'>
                                                 # Create the Conda environment
                                                 conda env create -f environment.yml
 
@@ -95,7 +96,7 @@ const Docs = () => {
                                             Example Response:
                                             <div className='mockup-code'>
                                             <pre data-prefix="~$">
-                                                <code>
+                                                <code className='text-green-400'>
                                                     {`{ "Hello": "Welcome to QueryLensAI" }`}
                                                 </code>
                                             </pre>
@@ -114,7 +115,7 @@ const Docs = () => {
                                             Example Response:
                                             <div className='mockup-code'>
                                             <pre data-prefix="~$">
-                                                <code>
+                                                <code className='text-green-400'>
                                                     {`{ "names": ["acs_data", "sales_records"] }`}
                                                 </code>
                                             </pre>
@@ -133,7 +134,7 @@ const Docs = () => {
                                             Input Example:
                                             <div className='mockup-code'>
                                             <pre data-prefix="~$">
-                                                <code>
+                                                <code className='text-green-400'>
                                                     {`{
   "query": "What is the total population for counties with poverty rates above 20%?"
 }`}
@@ -145,7 +146,7 @@ const Docs = () => {
                                             Response Example:
                                             <div className='mockup-code'>
                                             <pre data-prefix="~$">
-                                                <code>
+                                                <code className='text-green-400'>
                                                     {`{
   "answer": "The total population for counties with poverty rates above 20% is 1,200,000."
 }`}
@@ -182,8 +183,8 @@ const Docs = () => {
                             <strong>Example 1</strong>:
                             <ul>
                                 <li>
-                                    <em>Query</em>: <em>"What is the average income for states with a
-                                        population greater than 1 million?"</em>
+                                    <em>Query</em>: <em>&quot;What is the average income for states with a
+                                        population greater than 1 million?&quot;</em>
                                 </li>
                                 <li>
                                     <strong>Transformation</strong>:
@@ -196,7 +197,7 @@ const Docs = () => {
                                 </li>
                                 <li>
                                     <strong>Result</strong>:
-                                    <em>"The average income for states with a population greater than 1 million is $55,000."</em>
+                                    <em>&quot;The average income for states with a population greater than 1 million is $55,000.&quot;</em>
                                 </li>
                             </ul>
                         </li>
