@@ -1,12 +1,12 @@
 import { useUser } from "@clerk/clerk-react";
 import { ArrowRightFromLine } from 'lucide-react';
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const DashNav = () => {
     const { user } = useUser();
 
     return (
-        <div className="w-auto mx-10 my-10 h-16 bg-white text-white flex items-center justify-between border-2 border-gray-200 py-5 px-4 gap-20 rounded-badge">
+        <div className="md:w-auto w-[95%] md:mx-10 my-10 h-16 bg-white text-white flex items-center justify-between border-2 border-gray-200 py-5 px-4 md:gap-20 gap-3 rounded-badge">
             {/* <h1>Welcome, {user?.firstName}!</h1> */}
             {/* <p>Email: {user?.primaryEmailAddress?.emailAddress}</p> */}
             <img src="Logo-text.svg" alt="logo-text" width={150} className='md:w-200' />
