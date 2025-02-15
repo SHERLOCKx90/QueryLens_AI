@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react'
 import Docs from './Pages/Docs/Docs.jsx';
 import About from './Pages/About/About.jsx';
+import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 
 //publishable key
 const PUBLISHABLE_KEY = 'pk_test_Y2FyaW5nLXNhbG1vbi0xMS5jbGVyay5hY2NvdW50cy5kZXYk';
@@ -20,7 +21,9 @@ const RoutesObj = [
   { path: '/login', element: <Login /> },
   { path: '/Docs', element: <Docs /> },
   { path: '/About', element: <About /> },
+  { path: '/Dashboard', element: <Dashboard /> },
 ]
+
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">

@@ -7,9 +7,6 @@ const App = () => {
   return (
     <MainLayout>
       <h1><Landing /></h1>
-      <header>
-        
-      </header>
     </MainLayout>
   )
 }
