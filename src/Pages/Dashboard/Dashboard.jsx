@@ -12,7 +12,7 @@ const Dashboard = () => {
       </DashboardLayout>
 
       {/* Footer Section */}
-      <div className="text-center py-4 bg-white w-full">
+      <div className="text-center py-4 bg-white w-full mt-10">
         <h1 className="text-md text-gray-400">© 2025 QueryLens AI. All Rights Reserved.</h1>
       </div>
     </div>
