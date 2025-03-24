@@ -122,7 +122,7 @@
 
 // DYNAMIC CODE
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DashMenu from '../../Components/DashMenu';
 import { Plus, MoveRight, ChevronDown, Check } from 'lucide-react';
 import '../../Components/Custom/CustomScroll.css';
@@ -146,9 +146,9 @@ const DashSession = () => {
             try {
                 const response = await fetch(API_ENDPOINTS.GET_DATASET);
                 const data = await response.json();
-                if (data && data.datasets) {
-                    setDatasetVersions(data.datasets); // Assuming response is { "datasets": ["v0", "v1", "v2"] }
-                    setSelectedVersion(data.datasets[0]); // Default to first dataset
+                if (data && data.names) {
+                    setDatasetVersions(data.names); // Assuming response is { "datasets": ["v0", "v1", "v2"] }
+                    setSelectedVersion(data.names[0]); // Default to first dataset
                 }
             } catch (err) {
                 console.error("Error fetching datasets:", err);
@@ -169,7 +169,7 @@ const DashSession = () => {
             setChat(true); // Ensure chat box is shown
 
             try {
-                const response = await fetch(API_ENDPOINTS[`GET_ANS_${selectedVersion.toUpperCase()}`], {
+                const response = await fetch(API_ENDPOINTS.GET_ANS_V0, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
