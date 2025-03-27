@@ -1,10 +1,11 @@
-// STATIC CODE
+// // DYNAMIC CODE
 
-// import React, { useState } from 'react';
+// import { useState, useEffect } from 'react';
 // import DashMenu from '../../Components/DashMenu';
 // import { Plus, MoveRight, ChevronDown, Check } from 'lucide-react';
 // import '../../Components/Custom/CustomScroll.css';
 // import { DatabaseZap } from 'lucide-react';
+// import API_ENDPOINTS from '../../../config';
 
 // const DashSession = () => {
 //     const [isOpen, setIsOpen] = useState(false);
@@ -12,17 +13,55 @@
 //     const [messages, setMessages] = useState([]); // Stores chat messages
 //     const [inputText, setInputText] = useState(""); // Stores input field text
 //     const [dbDropdownOpen, setDbDropdownOpen] = useState(false); // Controls DB dropdown visibility
-//     const [selectedDb, setSelectedDb] = useState("Select Database"); // Stores selected database name
+//     const [selectedVersion, setSelectedVersion] = useState(""); // Stores selected dataset version
+//     const [datasetVersions, setDatasetVersions] = useState([]); // Stores fetched dataset versions
+//     const [loadingDatasets, setLoadingDatasets] = useState(true); // Track dataset fetch status
+//     const [error, setError] = useState(null); // Track API errors
 
-//     // List of available databases
-//     const databases = ["ACS", "UCS", "ICS"];
+//     // Fetch dataset versions from API on component mount
+//     useEffect(() => {
+//         const fetchDatasets = async () => {
+//             try {
+//                 const response = await fetch(API_ENDPOINTS.GET_DATASET);
+//                 const data = await response.json();
+//                 if (data && data.names) {
+//                     setDatasetVersions(data.names); // Assuming response is { "datasets": ["v0", "v1", "v2"] }
+//                     setSelectedVersion(data.names[0]); // Default to first dataset
+//                 }
+//             } catch (err) {
+//                 console.error("Error fetching datasets:", err);
+//                 setError("Failed to load datasets. Please try again.");
+//             } finally {
+//                 setLoadingDatasets(false);
+//             }
+//         };
+//         fetchDatasets();
+//     }, []);
 
-//     // Function to handle sending messages
-//     const handleSendMessage = () => {
-//         if (inputText.trim() !== "") {
-//             setMessages([...messages, { text: inputText, sender: "user" }]);
+//     // Function to send query and fetch AI response
+//     const handleSendMessage = async () => {
+//         if (inputText.trim() !== "" && selectedVersion) {
+//             const newMessages = [...messages, { text: inputText, sender: "user" }];
+//             setMessages(newMessages);
 //             setInputText(""); // Clear input field after sending
 //             setChat(true); // Ensure chat box is shown
+
+//             try {
+//                 const response = await fetch(API_ENDPOINTS.GET_ANS_V0, {
+//                     method: "POST",
+//                     headers: {
+//                         "Content-Type": "application/json",
+//                     },
+//                     body: JSON.stringify({ query: inputText }),
+//                 });
+
+//                 const data = await response.json();
+
+//                 setMessages([...newMessages, { text: data.answer || "No response from AI.", sender: "bot" }]);
+//             } catch (error) {
+//                 console.error("Error fetching response:", error);
+//                 setMessages([...newMessages, { text: "Error fetching response. Please try again.", sender: "bot" }]);
+//             }
 //         }
 //     };
 
@@ -35,34 +74,40 @@
 
 //             {/* Main Chat Area */}
 //             <div className="flex flex-col gap-5 md:w-3/4 lg:w-2/3 relative">
-//                 {/* Database Selection & Query Button */}
+//                 {/* Dataset Selection Dropdown */}
 //                 <div className='flex flex-col md:flex-row gap-3'>
 //                     <button
 //                         className="w-full md:w-1/2 lg:w-1/3 px-4 py-2 text-lg font-medium bg-green-200 text-black rounded-badge flex gap-3 justify-between items-center transition cursor-pointer group"
 //                         onClick={() => setDbDropdownOpen(!dbDropdownOpen)}
 //                     >
 //                         <span className="text-green-600 transition group"><DatabaseZap className='group-hover:text-black transition'/></span>
-//                         {selectedDb}
+//                         {selectedVersion ? selectedVersion.toUpperCase() : "Loading..."}
 //                         <span className={`transition-transform ${dbDropdownOpen ? "rotate-180" : ""}`}><ChevronDown /></span>
 //                     </button>
 
-//                     {/* Database Dropdown Menu */}
+//                     {/* Dataset Dropdown Menu */}
 //                     {dbDropdownOpen && (
 //                         <div className="absolute top-12 left-0 md:left-auto md:w-1/2 lg:w-1/3 bg-white p-5 rounded-badge shadow-xl z-10">
-//                             <ul className="flex flex-col">
-//                                 {databases.map((db, index) => (
-//                                     <li
-//                                         key={index}
-//                                         className="px-4 py-2 hover:bg-gray-200 cursor-pointer flex justify-between items-center rounded-badge transition"
-//                                         onClick={() => {
-//                                             setSelectedDb(db);
-//                                             setDbDropdownOpen(false);
-//                                         }}
-//                                     >
-//                                         {db} {selectedDb === db && <Check className="text-green-600" />}
-//                                     </li>
-//                                 ))}
-//                             </ul>
+//                             {loadingDatasets ? (
+//                                 <p className="text-center text-gray-500">Loading datasets...</p>
+//                             ) : error ? (
+//                                 <p className="text-center text-red-500">{error}</p>
+//                             ) : (
+//                                 <ul className="flex flex-col">
+//                                     {datasetVersions.map((version, index) => (
+//                                         <li
+//                                             key={index}
+//                                             className="px-4 py-2 hover:bg-gray-200 cursor-pointer flex justify-between items-center rounded-badge transition"
+//                                             onClick={() => {
+//                                                 setSelectedVersion(version);
+//                                                 setDbDropdownOpen(false);
+//                                             }}
+//                                         >
+//                                             {version.toUpperCase()} {selectedVersion === version && <Check className="text-green-600" />}
+//                                         </li>
+//                                     ))}
+//                                 </ul>
+//                             )}
 //                         </div>
 //                     )}
 
@@ -75,7 +120,7 @@
 //                     </button>
 //                 </div>
 
-//                 {/* Chat Box (Scrollable Messages - Scrolls Earlier) */}
+//                 {/* Chat Box (Scrollable Messages) */}
 //                 {chat && (
 //                     <div className="w-full border rounded-badge p-6 flex flex-col gap-3 transition-transform bg-white">
 //                         <h2 className="text-lg md:text-xl font-semibold">Hi there. What can I do for you?</h2>
@@ -119,12 +164,9 @@
 // export default DashSession;
 
 
-
-// DYNAMIC CODE
-
 import { useState, useEffect } from 'react';
 import DashMenu from '../../Components/DashMenu';
-import { Plus, MoveRight, ChevronDown, Check } from 'lucide-react';
+import { Plus, MoveRight, ChevronDown, Check, Ellipsis } from 'lucide-react';
 import '../../Components/Custom/CustomScroll.css';
 import { DatabaseZap } from 'lucide-react';
 import API_ENDPOINTS from '../../../config';
@@ -139,6 +181,7 @@ const DashSession = () => {
     const [datasetVersions, setDatasetVersions] = useState([]); // Stores fetched dataset versions
     const [loadingDatasets, setLoadingDatasets] = useState(true); // Track dataset fetch status
     const [error, setError] = useState(null); // Track API errors
+    const [loadingMessage, setLoadingMessage] = useState(false); // Track loading state for message
 
     // Fetch dataset versions from API on component mount
     useEffect(() => {
@@ -167,6 +210,7 @@ const DashSession = () => {
             setMessages(newMessages);
             setInputText(""); // Clear input field after sending
             setChat(true); // Ensure chat box is shown
+            setLoadingMessage(true); // Start loading animation
 
             try {
                 const response = await fetch(API_ENDPOINTS.GET_ANS_V0, {
@@ -178,11 +222,12 @@ const DashSession = () => {
                 });
 
                 const data = await response.json();
-
                 setMessages([...newMessages, { text: data.answer || "No response from AI.", sender: "bot" }]);
             } catch (error) {
                 console.error("Error fetching response:", error);
                 setMessages([...newMessages, { text: "Error fetching response. Please try again.", sender: "bot" }]);
+            } finally {
+                setLoadingMessage(false); // Stop loading animation after response is received
             }
         }
     };
@@ -255,6 +300,13 @@ const DashSession = () => {
                                     {msg.text}
                                 </div>
                             ))}
+
+                            {/* Loading dots animation */}
+                            {loadingMessage && (
+                                <div className="px-4 py-2 rounded-badge w-fit max-w-[80%] bg-gray-300 text-black self-start">
+                                    <span className="animate-pulse"><Ellipsis/></span>
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
