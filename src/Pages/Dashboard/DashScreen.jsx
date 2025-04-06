@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useUser } from "@clerk/clerk-react";
 import DatabaseAnimation from '../../Components/Animations/DatabaseAnimation';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { MoveRight } from 'lucide-react';
 import DashSession from './DashSession';
 import { Sparkles } from 'lucide-react';
@@ -9,7 +9,6 @@ import { Sparkles } from 'lucide-react';
 const DashScreen = () => {
   const { user } = useUser();
   const [open, setOpen] = useState(false);
-
   return (
     <div className='w-full flex flex-col text-black my-5 px-5 md:px-20 md:items-center md:justify-center'>
       {/* Container for content */}
@@ -24,7 +23,8 @@ const DashScreen = () => {
             <h3 className='text-xl md:text-2xl lg:text-3xl text-gray-500 font-normal md:w-3/4'>
               Type your query into the prompt-box after selecting the database to interact with. All the best!
             </h3>
-            <button className='mt-5 bg-black px-4 py-2 text-white rounded-full font-medium transition-all flex gap-2 hover:gap-5 w-fit' onClick={() => { setOpen(!open) }}>Get Started <span><MoveRight /></span></button>
+            <a href="http://localhost:3000/"><button className='mt-5 bg-black px-4 py-2 text-white rounded-full font-medium transition-all flex gap-2 hover:gap-5 w-fit'>Get Started <span><MoveRight /></span></button></a>
+            
           </div>
 
           {/* Animation Section */}
