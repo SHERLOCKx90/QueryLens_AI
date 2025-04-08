@@ -23,7 +23,7 @@ const DashScreen = () => {
             <h3 className='text-xl md:text-2xl lg:text-3xl text-gray-500 font-normal md:w-3/4'>
               Type your query into the prompt-box after selecting the database to interact with. All the best!
             </h3>
-            <a href="https://querylensai-dashboard.vercel.app/"><button className='mt-5 bg-black px-4 py-2 text-white rounded-full font-medium transition-all flex gap-2 hover:gap-5 w-fit'>Get Started <span><MoveRight /></span></button></a>
+            <a href="https://http://localhost:3000/"><button className='mt-5 bg-black px-4 py-2 text-white rounded-full font-medium transition-all flex gap-2 hover:gap-5 w-fit'>Get Started <span><MoveRight /></span></button></a>
             
           </div>
 
